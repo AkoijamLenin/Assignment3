@@ -27,7 +27,7 @@ public class GameManager : MonoBehaviour
     
    public void AddToPair(Card_flip card)
     {
-        
+        if (opened.Contains(card)) return;//new
         opened.Add(card);
         if (opened.Count >=2)
         {

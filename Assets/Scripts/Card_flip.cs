@@ -8,24 +8,31 @@ public class Card_flip : MonoBehaviour
     [SerializeField] Animator animator;
     [SerializeField] int card_id;
      
-    bool isfacingfront;
-  
+    bool isfacingfront;//I add this bool to check if the card is currently facing front or back
+    bool iscurrentlyChanging;//I add this so that we can't spam the mouse and the animation finishes playing
     private void OnMouseDown()
     {
-      
-        if (!isfacingfront)
+        if (iscurrentlyChanging)
         {
+            return;
+        }
+        if (!isfacingfront)
+        {   
+            iscurrentlyChanging = true;
             animator.SetTrigger("FlipIn");
             SendCardId();
-            ChangeSide();
+         
             Debug.Log("Card_ID = "+ card_id);
             
         }
+        else
+        {
+            iscurrentlyChanging = true;
+            CardFLipBack_Animation();
+            GameManager.Instance.ClearList();
+        }
     }
-    public void ChangeSide()
-    {
-        isfacingfront = !isfacingfront;
-    }
+   
     private void SendCardId()
     {
         GameManager.Instance.AddToPair(this);
@@ -47,12 +54,21 @@ public class Card_flip : MonoBehaviour
     public void CardMatch()
     {
 
-
         selfDestroy();
     }
     private void selfDestroy()
     {
         //Destroy(this.gameObject);
         gameObject.SetActive(false);
+    }
+    public void Face()
+    {
+        iscurrentlyChanging = false;
+        isfacingfront = true;
+    }
+    public void Back()
+    {
+        iscurrentlyChanging = false;
+        isfacingfront =false;
     }
 }

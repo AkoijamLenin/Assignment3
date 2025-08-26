@@ -40,7 +40,7 @@ public class GameManager : MonoBehaviour
         IEnumerator checkCardMatch(Card_flip a, Card_flip b)
         {
 
-            opened.Clear();
+           ClearList();
         if (a.getID() == b.getID())
         {
             yield return new WaitForSeconds(0.5f);
@@ -61,6 +61,9 @@ public class GameManager : MonoBehaviour
         }
 
         }
-
+    public void ClearList()
+    {
+        opened.Clear();
+    }
 
 }

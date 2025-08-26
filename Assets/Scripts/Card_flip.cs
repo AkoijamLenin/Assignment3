@@ -52,6 +52,7 @@ public class Card_flip : MonoBehaviour
     }
     private void selfDestroy()
     {
-        Destroy(this.gameObject);
+        //Destroy(this.gameObject);
+        gameObject.SetActive(false);
     }
 }

@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,10 +6,16 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance { get; private set; }
-    
+    public event EventHandler onCardMatch;
+    public event EventHandler onCardFlip;
     
     private void Awake()
     {
+        if (Instance != null && Instance != this)
+        {
+            Destroy(gameObject);
+            return;
+        }
         Instance = this;
     }
 
@@ -20,6 +27,7 @@ public class GameManager : MonoBehaviour
     
    public void AddToPair(Card_flip card)
     {
+        
         opened.Add(card);
         if (opened.Count >=2)
         {
@@ -31,7 +39,6 @@ public class GameManager : MonoBehaviour
 
         IEnumerator checkCardMatch(Card_flip a, Card_flip b)
         {
-       
 
             opened.Clear();
         if (a.getID() == b.getID())
@@ -40,7 +47,8 @@ public class GameManager : MonoBehaviour
             a.CardMatch_Animation();
             b.CardMatch_Animation();
             Debug.Log("removed = " + a + " and "+ b);//matched
-        
+            onCardMatch?.Invoke(this, EventArgs.Empty);
+
         }
         else
         {
@@ -48,6 +56,7 @@ public class GameManager : MonoBehaviour
             yield return new WaitForSeconds(0.5f);
             a.CardFLipBack_Animation();
             b.CardFLipBack_Animation();
+            onCardFlip?.Invoke(this, EventArgs.Empty);
 
         }
 

@@ -12,7 +12,7 @@ public class Card_flip : MonoBehaviour
   
     private void OnMouseDown()
     {
-      //  Debug.Log("Flip");
+      
         if (!isfacingfront)
         {
             animator.SetTrigger("FlipIn");
@@ -26,13 +26,32 @@ public class Card_flip : MonoBehaviour
     {
         isfacingfront = !isfacingfront;
     }
-    public void SendCardId()
+    private void SendCardId()
     {
-        GameManager.Instance.AddToPair(card_id);
+        GameManager.Instance.AddToPair(this);
+      
     }
     public int getID()
     {
         return card_id;
 
+    }
+    public void CardFLipBack_Animation()
+    {
+        animator.SetTrigger("FlipBack");
+    }
+    public void CardMatch_Animation()
+    {
+        animator.SetTrigger("CardMatch");
+    }
+    public void CardMatch()
+    {
+
+
+        selfDestroy();
+    }
+    private void selfDestroy()
+    {
+        Destroy(this.gameObject);
     }
 }

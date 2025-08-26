@@ -10,13 +10,26 @@ public class Card_flip : MonoBehaviour
      
     bool isfacingfront;//I add this bool to check if the card is currently facing front or back
     bool iscurrentlyChanging;//I add this so that we can't spam the mouse and the animation finishes playing
+    public enum CardState
+    {
+        face,
+        back,
+    }
+    public CardState card_state;
+    private void Start()
+    {
+     card_state = CardState.back;
+    
+    }
     private void OnMouseDown()
     {
         if (iscurrentlyChanging)
         {
             return;
         }
-        if (!isfacingfront)
+        //if (!isfacingfront)//old
+        if (card_state==CardState.back)//new
+
         {   
             iscurrentlyChanging = true;
             animator.SetTrigger("FlipIn");
@@ -64,11 +77,13 @@ public class Card_flip : MonoBehaviour
     public void Face()
     {
         iscurrentlyChanging = false;
-        isfacingfront = true;
+        card_state = CardState.face;//new
+       // isfacingfront = true;//old
     }
     public void Back()
     {
         iscurrentlyChanging = false;
-        isfacingfront =false;
+        card_state = CardState.back;//new
+        //isfacingfront =false;//old
     }
 }

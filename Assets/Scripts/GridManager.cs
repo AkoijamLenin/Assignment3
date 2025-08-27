@@ -5,53 +5,64 @@ using UnityEngine;
 public class GridManager : MonoBehaviour
 {
     //2X2 2X3 5X6
- 
-    [SerializeField] GameObject card_prefab;
-    [SerializeField] int starting_xPos;
-    [SerializeField] int starting_yPos;
-    [SerializeField] int row;
-    [SerializeField] int column;
-    [SerializeField] int xOffset;
-    [SerializeField] int yOffset;
-    float size;
+    [SerializeField] GameObject cardPrefab;
+    [SerializeField] int rows = 2;
+    [SerializeField] int column = 2;
 
-    [SerializeField] float offset;
-    private void Start()
+    void Start()
     {
-        size = Camera.main.orthographicSize / 2f;
-        int xPos = starting_xPos;
-        int yPos = starting_yPos;
+        GenerateGrid();
+    }
 
-        for (int j = 1; j <= column; j++)
+    void GenerateGrid()
+    {
+        
+        float camHeight = Camera.main.orthographicSize * 2f;
+        float camWidth = camHeight * Camera.main.aspect;
+
+         float cellWidth = camWidth / column;
+        float cellHeight = camHeight / rows;
+
+        SpriteRenderer sr = cardPrefab.GetComponentInChildren<SpriteRenderer>();
+        Vector2 cardSize = sr.bounds.size;
+
+        float scaleX = cellWidth / cardSize.x;
+        float scaleY = cellHeight / cardSize.y;
+        float finalScale = Mathf.Min(scaleX, scaleY); 
+
+       
+        for (int j = 0; j < rows; j++)
         {
+             for (int i = 0; i < column; i++)
+             {
+                float posX = -camWidth / 2 + cellWidth * (i + 0.5f);
+                float posY = camHeight / 2 - cellHeight * (j + 0.5f);
 
-         for(int i =1;i<=row;i++)
-         {
-            SpawnCards(xPos,yPos);
-            xPos += xOffset;
-
-
-         }
-            yPos -= yOffset;
-            xPos = starting_xPos;
+                GameObject card = Instantiate(cardPrefab, new Vector3(posX, posY, 0), Quaternion.identity);
+                card.transform.localScale = new Vector3(finalScale, finalScale, 0f);
+             }
         }
     }
 
-
-
-
-
-
-
-    void SpawnCards(int x, int y)
+    void FirstLayout()//2X2
     {
-        GameObject temp=Instantiate(card_prefab,new Vector3(x,y,0),Quaternion.identity);
-        temp.transform.localScale = new Vector3(size / offset, size / offset,0f);
-        Debug.Log("scale= " + size / offset);
 
-        
+
 
     }
-   
+    void SecondLayout()//2X3
+    {
+
+
+
+    }
+    void ThirdLayout()//5X6
+    {
+
+
+
+    }
+
+
 
 }

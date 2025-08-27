@@ -1,3 +1,4 @@
+using Microsoft.Unity.VisualStudio.Editor;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -7,8 +8,10 @@ public class Card_flip : MonoBehaviour
 {
     [SerializeField] Animator animator;
     [SerializeField] int card_id;
-     
-    bool isfacingfront;//I add this bool to check if the card is currently facing front or back
+    [SerializeField] SpriteRenderer cardsprite;
+    [SerializeField] Image BackGround; 
+    [SerializeField] Image Front; 
+   
     bool iscurrentlyChanging;//I add this so that we can't spam the mouse and the animation finishes playing
     public enum CardState
     {
@@ -27,8 +30,8 @@ public class Card_flip : MonoBehaviour
         {
             return;
         }
-        //if (!isfacingfront)//old
-        if (card_state==CardState.back)//new
+        
+        if (card_state==CardState.back)
 
         {   
             iscurrentlyChanging = true;
@@ -77,13 +80,19 @@ public class Card_flip : MonoBehaviour
     public void Face()
     {
         iscurrentlyChanging = false;
-        card_state = CardState.face;//new
-       // isfacingfront = true;//old
+        card_state = CardState.face;
+      
     }
     public void Back()
     {
         iscurrentlyChanging = false;
-        card_state = CardState.back;//new
-        //isfacingfront =false;//old
+        card_state = CardState.back;
+    }
+    public void changeImage()
+    {
+        //if(card=BackGround)
+        {
+
+        }
     }
 }

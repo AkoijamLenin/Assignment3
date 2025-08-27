@@ -37,10 +37,8 @@ public class Card_flip : MonoBehaviour
         {   
             iscurrentlyChanging = true;
             animator.SetTrigger("FlipIn");
-            SendCardId();
+            SendCard();
          
-            Debug.Log("Card_ID = "+ card_id);
-            
         }
         else
         {
@@ -50,7 +48,7 @@ public class Card_flip : MonoBehaviour
         }
     }
    
-    private void SendCardId()
+    private void SendCard()
     {
         GameManager.Instance.AddToPair(this);
       
@@ -71,13 +69,10 @@ public class Card_flip : MonoBehaviour
     public void CardMatch()
     {
 
-        selfDestroy();
-    }
-    private void selfDestroy()
-    {
         Destroy(this.gameObject);
        // gameObject.SetActive(false);
     }
+  
     public void Face()
     {
         iscurrentlyChanging = false;

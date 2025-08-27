@@ -75,9 +75,8 @@ public class GameManager : MonoBehaviour
         public int column;
     }
 
-    private void Update()
-    {
-        if(Input.GetKeyDown(KeyCode.A))
+   
+        public void Easyone()
         {
             onGridSelect?.Invoke(this, new CellSize { 
                 row=2,
@@ -85,7 +84,7 @@ public class GameManager : MonoBehaviour
             });
                
         }
-        if (Input.GetKeyDown(KeyCode.S))
+        public void Mediumone()
         {
             onGridSelect?.Invoke(this, new CellSize
             {
@@ -94,7 +93,7 @@ public class GameManager : MonoBehaviour
             });
 
         }
-        if (Input.GetKeyDown(KeyCode.D))
+        public void Hardone()
         {
             onGridSelect?.Invoke(this, new CellSize
             {
@@ -103,7 +102,7 @@ public class GameManager : MonoBehaviour
             });
 
         }
-    }
+    
 
 
 

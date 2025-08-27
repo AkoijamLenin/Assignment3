@@ -7,6 +7,7 @@ public class GridManager : MonoBehaviour
 
     //2X2 2X3 5X6
     [SerializeField] GameObject cardPrefab;
+    [SerializeField] List<GameObject>cardPrefabs;
     private int rows;
     private int column;
     private float top_Offset=2f;// Its to add a offset gap from the top so that the cards stay in screen 
@@ -27,7 +28,7 @@ public class GridManager : MonoBehaviour
     void GenerateGrid()
     {
         float camHeight = Camera.main.orthographicSize * 2f;
-        camHeight =camHeight - top_Offset;//
+        camHeight = camHeight - top_Offset;//
         float camWidth =camHeight * Camera.main.aspect;
 
          float cellWidth =camWidth / column;
@@ -36,8 +37,8 @@ public class GridManager : MonoBehaviour
         SpriteRenderer sr =cardPrefab.GetComponentInChildren<SpriteRenderer>();
         Vector2 cardSize = sr.bounds.size;
 
-        float scaleX =cellWidth /cardSize.x;
-        float scaleY =cellHeight  / cardSize.y ;//new
+        float scaleX = cellWidth /cardSize.x;
+        float scaleY = cellHeight  / cardSize.y ;//new
         float finalScale=  Mathf.Min(scaleX, scaleY); 
 
        //
@@ -57,24 +58,7 @@ public class GridManager : MonoBehaviour
     }
 
 
-    void FirstLayout()//2X2
-    {
-
-
-
-    }
-    void SecondLayout()//2X3
-    {
-
-
-
-    }
-    void ThirdLayout()//5X6
-    {
-
-
-
-    }
+   
 
 
 

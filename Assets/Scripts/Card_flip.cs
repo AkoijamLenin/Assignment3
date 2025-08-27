@@ -3,14 +3,15 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class Card_flip : MonoBehaviour
 {
     [SerializeField] Animator animator;
     [SerializeField] int card_id;
     [SerializeField] SpriteRenderer cardsprite;
-    [SerializeField] Image BackGround; 
-    [SerializeField] Image Front; 
+    [SerializeField] Sprite BackGround; 
+    [SerializeField] Sprite Front; 
    
     bool iscurrentlyChanging;//I add this so that we can't spam the mouse and the animation finishes playing
     public enum CardState
@@ -90,9 +91,14 @@ public class Card_flip : MonoBehaviour
     }
     public void changeImage()
     {
-        //if(card=BackGround)
+        Sprite i = cardsprite.sprite;
+        if (i==BackGround)
         {
-
+            cardsprite.sprite = Front;
+        }
+        else
+        {
+            cardsprite.sprite = BackGround;
         }
     }
 }

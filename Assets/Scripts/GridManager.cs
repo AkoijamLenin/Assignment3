@@ -8,13 +8,14 @@ public class GridManager : MonoBehaviour
     //2X2 2X3 5X6
     [SerializeField] GameObject cardPrefab;
     [SerializeField] List<GameObject>cardPrefabs;
+    [SerializeField] List<GameObject>randomCards;
     private int rows;
     private int column;
     private float top_Offset=2f;// Its to add a offset gap from the top so that the cards stay in screen 
     void Start()
     {
         GameManager.Instance.onGridSelect += GameManager_onGridSelect;
-
+        randomCardSelect();
     }
 
     private void GameManager_onGridSelect(object sender, GameManager.CellSize e)
@@ -57,8 +58,30 @@ public class GridManager : MonoBehaviour
         }
     }
 
+    public int sizetemp;
+    void randomCardSelect()
+    {
+        
 
-   
+        for (int i = 0; i < sizetemp;)
+        {
+            int randomPos = Random.Range(0,cardPrefabs.Count);
+            Debug.Log("count =" + cardPrefabs.Count);
+            GameObject randomCard = cardPrefabs[randomPos];
+            cardPrefabs.Remove(cardPrefabs[randomPos]);
+
+            for (int j = 0; j < 2; j++)
+            { 
+                randomCards.Add(randomCard);
+                i++;
+            }
+
+
+
+        
+        }
+
+    }
 
 
 

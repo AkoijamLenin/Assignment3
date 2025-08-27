@@ -19,8 +19,8 @@ public class ScoreManager : MonoBehaviour
     {
         point++;
         move++;
-        points.text = "Points :" + point;
-        moves.text = "Moves :" + move;
+        points.text = "Points: " + point;
+        moves.text = "Moves: " + move;
     }
 
     private void GameManager_onCardFlip(object sender, System.EventArgs e)

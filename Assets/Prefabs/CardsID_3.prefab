@@ -95,7 +95,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animator: {fileID: 4659261222951288068}
-  card_id: 2
+  card_id: 3
   cardsprite: {fileID: 4137975816264592185}
   BackGround: {fileID: 21300000, guid: 7e1e5ca6eb254a145a18ef6ee24b9d28, type: 3}
   Front: {fileID: 21300000, guid: cd563f26985960a41aae5fa05e7c7ab3, type: 3}

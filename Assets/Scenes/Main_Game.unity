@@ -983,7 +983,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cardPrefab: {fileID: 1510032600367189755, guid: 36f17481853e71843882086f0d5dc982, type: 3}
-  cardPrefabs: []
+  cardPrefabs:
+  - {fileID: 5767201014133381817, guid: ed8b09619a19be74a9c4a20e6cdc0d6f, type: 3}
+  - {fileID: 5767201014133381817, guid: ed8b09619a19be74a9c4a20e6cdc0d6f, type: 3}
+  - {fileID: 6638861637767933556, guid: 4624cd7420f0a934bb40860dfa6ac3ed, type: 3}
+  - {fileID: 6638861637767933556, guid: 4624cd7420f0a934bb40860dfa6ac3ed, type: 3}
+  - {fileID: 1510032600367189755, guid: 36f17481853e71843882086f0d5dc982, type: 3}
+  - {fileID: 1510032600367189755, guid: 36f17481853e71843882086f0d5dc982, type: 3}
+  - {fileID: 3051415113537531843, guid: 7860abf226a1e3240a4a1561336da63b, type: 3}
+  - {fileID: 3051415113537531843, guid: 7860abf226a1e3240a4a1561336da63b, type: 3}
 --- !u!4 &1120292677
 Transform:
   m_ObjectHideFlags: 0
@@ -1840,17 +1848,21 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1540226781629381413, guid: ed8b09619a19be74a9c4a20e6cdc0d6f, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 136d8f92e06cb8e419b8ccf0ec185865, type: 3}
     - target: {fileID: 5767201014133381816, guid: ed8b09619a19be74a9c4a20e6cdc0d6f, type: 3}
       propertyPath: m_RootOrder
       value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 5767201014133381816, guid: ed8b09619a19be74a9c4a20e6cdc0d6f, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: 2.07
       objectReference: {fileID: 0}
     - target: {fileID: 5767201014133381816, guid: ed8b09619a19be74a9c4a20e6cdc0d6f, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -7.04
+      value: 2.58
       objectReference: {fileID: 0}
     - target: {fileID: 5767201014133381816, guid: ed8b09619a19be74a9c4a20e6cdc0d6f, type: 3}
       propertyPath: m_LocalPosition.z

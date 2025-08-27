@@ -7,8 +7,14 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager Instance { get; private set; }
     public event EventHandler onCardMatch;
-    public event EventHandler onCardFlip;
-    
+    public event EventHandler onCardFlip; 
+    public event EventHandler<CellSize> onGridSelect;
+    public class CellSize
+    {
+        public int row;
+        public int column;
+    }
+
     private void Awake()
     {
         if (Instance != null && Instance != this)
@@ -38,70 +44,64 @@ public class GameManager : MonoBehaviour
 
    }
 
-        IEnumerator checkCardMatch(Card_flip a, Card_flip b)
-        {
+   IEnumerator checkCardMatch(Card_flip a, Card_flip b)
+   {
 
-           ClearList();
-        if (a.getID() == b.getID())
-        {
-            yield return new WaitForSeconds(0.5f);
-            a.CardMatch_Animation();
-            b.CardMatch_Animation();
-            Debug.Log("removed = " + a + " and "+ b);//matched
-            onCardMatch?.Invoke(this, EventArgs.Empty);
+      ClearList();
+   if (a.getID() == b.getID())
+   {
+       yield return new WaitForSeconds(0.5f);
+       a.CardMatch_Animation();
+       b.CardMatch_Animation();
+       Debug.Log("removed = " + a + " and "+ b);//matched
+       onCardMatch?.Invoke(this, EventArgs.Empty);
 
-        }
-        else
-        {
-            Debug.Log("not matched = " + a + " and "+ b);//not_matched
-            yield return new WaitForSeconds(0.5f);
-            a.CardFLipBack_Animation();
-            b.CardFLipBack_Animation();
-            onCardFlip?.Invoke(this, EventArgs.Empty);
+   }
+   else
+   {
+       Debug.Log("not matched = " + a + " and "+ b);//not_matched
+       yield return new WaitForSeconds(0.5f);
+       a.CardFLipBack_Animation();
+       b.CardFLipBack_Animation();
+       onCardFlip?.Invoke(this, EventArgs.Empty);
 
-        }
+   }
 
-        }
+   }
     public void ClearList()
     {
         opened.Clear();
     }
 
     //
-    public event EventHandler<CellSize> onGridSelect;
-    public class CellSize
-    {
-        public int row;
-        public int column;
-    }
 
    
-        public void Easyone()
+    public void Easyone()
+    {
+        onGridSelect?.Invoke(this, new CellSize { 
+            row=2,
+            column=2 
+        });
+           
+    }
+    public void Mediumone()
+    {
+        onGridSelect?.Invoke(this, new CellSize
         {
-            onGridSelect?.Invoke(this, new CellSize { 
-                row=2,
-                column=2 
-            });
-               
-        }
-        public void Mediumone()
-        {
-            onGridSelect?.Invoke(this, new CellSize
-            {
-                row = 2,
-                column = 3
-            });
+            row = 2,
+            column = 3
+        });
 
-        }
-        public void Hardone()
+    }
+    public void Hardone()
+    {
+        onGridSelect?.Invoke(this, new CellSize
         {
-            onGridSelect?.Invoke(this, new CellSize
-            {
-                row = 5,
-                column = 6
-            });
+            row = 5,
+            column = 6
+        });
 
-        }
+    }
     
 
 

@@ -17,15 +17,25 @@ public class ScoreManager : MonoBehaviour
 
     private void GameManager_onCardMatch(object sender, System.EventArgs e)
     {
-        point++;
-        move++;
-        points.text = "Points: " + point;
-        moves.text = "Moves: " + move;
+       
+       increasePoint_Score();
+       increaseMove_Score(); 
+      
     }
 
     private void GameManager_onCardFlip(object sender, System.EventArgs e)
     {
+        increaseMove_Score();
+    }
+
+    void increaseMove_Score()
+    {
         move++;
-        moves.text = "Moves :" + move;
+        moves.text = "Moves: " + move;
+    }
+    void increasePoint_Score()
+    {
+        point++;
+        points.text = "Points: " + point;
     }
 }

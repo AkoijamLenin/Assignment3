@@ -23,6 +23,7 @@ public class Card_flip : MonoBehaviour
     private void Start()
     {
      card_state = CardState.back;
+     cardsprite.sprite = BackGround;
     
     }
     private void OnMouseDown()
@@ -33,7 +34,6 @@ public class Card_flip : MonoBehaviour
         }
         
         if (card_state==CardState.back)
-
         {   
             iscurrentlyChanging = true;
             animator.SetTrigger("FlipIn");
@@ -75,8 +75,8 @@ public class Card_flip : MonoBehaviour
     }
     private void selfDestroy()
     {
-        //Destroy(this.gameObject);
-        gameObject.SetActive(false);
+        Destroy(this.gameObject);
+       // gameObject.SetActive(false);
     }
     public void Face()
     {

@@ -24,7 +24,8 @@ public class GameManager : MonoBehaviour
     {
         opened = new List<Card_flip>();
     }
-    
+    //
+
    public void AddToPair(Card_flip card)
     {
         if (opened.Contains(card)) return;//new
@@ -65,5 +66,45 @@ public class GameManager : MonoBehaviour
     {
         opened.Clear();
     }
+
+    //
+    public event EventHandler<CellSize> onGridSelect;
+    public class CellSize
+    {
+        public int row;
+        public int column;
+    }
+
+    private void Update()
+    {
+        if(Input.GetKeyDown(KeyCode.A))
+        {
+            onGridSelect?.Invoke(this, new CellSize { 
+                row=2,
+                column=2 
+            });
+               
+        }
+        if (Input.GetKeyDown(KeyCode.S))
+        {
+            onGridSelect?.Invoke(this, new CellSize
+            {
+                row = 2,
+                column = 3
+            });
+
+        }
+        if (Input.GetKeyDown(KeyCode.D))
+        {
+            onGridSelect?.Invoke(this, new CellSize
+            {
+                row = 5,
+                column = 6
+            });
+
+        }
+    }
+
+
 
 }

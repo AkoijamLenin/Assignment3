@@ -182,6 +182,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   animator: {fileID: 5270206963561043292}
   card_id: 0
+  cardsprite: {fileID: 0}
+  BackGround: {fileID: 0}
+  Front: {fileID: 0}
   card_state: 0
 --- !u!1 &4751760891290223847
 GameObject:

@@ -75,21 +75,13 @@ public class GridManager : MonoBehaviour
             Debug.Log("count temp =" + temp.Count);
             GameObject randomCard = temp[random_Pos];
             temp.Remove(temp[random_Pos]);
-            if (temp.Count == 0) { Debug.Log("count temp before =" + temp.Count); temp = new List<GameObject>(cardPrefabs); Debug.Log("count card  =" + cardPrefabs.Count); Debug.Log("count temp after =" + temp.Count); }
+            if (temp.Count == 0) temp = new List<GameObject>(cardPrefabs); 
            
             for (int j = 0; j < 2; j++)
             { 
                 random_Selectable_Cards.Add(randomCard);
                 i++;
             }
-
-
-
-        
         }
-
     }
-
-
-
 }

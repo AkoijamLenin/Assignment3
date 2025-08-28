@@ -23,8 +23,7 @@ public class Card_flip : MonoBehaviour
     private void Start()
     {
      card_state = CardState.back;
-     cardsprite.sprite = BackGround;
-    
+     cardsprite.sprite = BackGround; 
     }
     private void OnMouseDown()
     {
@@ -34,17 +33,17 @@ public class Card_flip : MonoBehaviour
         }
         
         if (card_state==CardState.back)
-        {   
+        {
+            Debug.Log("If" + this);
             iscurrentlyChanging = true;
             animator.SetTrigger("FlipIn");
             SendCard();
          
         }
-        else
+        else if(card_state==CardState.face)
         {
-            iscurrentlyChanging = true;
             CardFLipBack_Animation();
-            GameManager.Instance.ClearList();
+            SendCard();
         }
     }
    
@@ -60,6 +59,8 @@ public class Card_flip : MonoBehaviour
     }
     public void CardFLipBack_Animation()
     {
+        iscurrentlyChanging=true;
+        //if(iscurrentlyChanging) return;
         animator.SetTrigger("FlipBack");
     }
     public void CardMatch_Animation()
@@ -68,7 +69,6 @@ public class Card_flip : MonoBehaviour
     }
     public void CardMatch()
     {
-
         Destroy(this.gameObject);
        // gameObject.SetActive(false);
     }

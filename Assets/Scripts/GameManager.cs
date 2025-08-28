@@ -34,48 +34,50 @@ public class GameManager : MonoBehaviour
 
    public void AddToPair(Card_flip card)
     {
-        if (opened.Contains(card)) return;//new
-        opened.Add(card);
-        if (opened.Count >=2)
+        if (opened.Contains(card))
         {
-            StartCoroutine(checkCardMatch(opened[0], opened[1]));
+            opened.Remove(card);
+            return;//new
         }
+        opened.Add(card);
+        CheckCardCount();
 
 
    }
 
    IEnumerator checkCardMatch(Card_flip a, Card_flip b)
    {
-
-      ClearList();
    if (a.getID() == b.getID())
    {
-       yield return new WaitForSeconds(0.5f);
+       yield return new WaitForSeconds(0.1f);
        a.CardMatch_Animation();
        b.CardMatch_Animation();
-       Debug.Log("removed = " + a + " and "+ b);//matched
        onCardMatch?.Invoke(this, EventArgs.Empty);
-
    }
    else
    {
-       Debug.Log("not matched = " + a + " and "+ b);//not_matched
-       yield return new WaitForSeconds(0.5f);
+       yield return new WaitForSeconds(0.2f);
        a.CardFLipBack_Animation();
        b.CardFLipBack_Animation();
        onCardFlip?.Invoke(this, EventArgs.Empty);
 
    }
-
+        CheckCardCount();
    }
-    public void ClearList()
+   
+    public void CheckCardCount()
     {
-        opened.Clear();
+        if (opened.Count >= 2)
+        {
+            Card_flip first_Card = opened[0];
+            Card_flip second_Card = opened[1];
+            opened.RemoveRange(0, 2);
+            StartCoroutine(checkCardMatch(first_Card, second_Card));
+        }
     }
-
     //
 
-   
+
     public void Easyone()
     {
         onGridSelect?.Invoke(this, new CellSize { 
@@ -102,8 +104,4 @@ public class GameManager : MonoBehaviour
         });
 
     }
-    
-
-
-
 }

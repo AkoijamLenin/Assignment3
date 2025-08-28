@@ -55,10 +55,10 @@ public class GameManager : MonoBehaviour
        a.CardMatch_Animation();
        b.CardMatch_Animation();
        onCardMatch?.Invoke(this, EventArgs.Empty);
-       number_of_cards--;
+       number_of_cards-=2;Debug.Log("number of cards " + number_of_cards);
        if (number_of_cards == 0)
        {
-          onGameOver?.Invoke(this, EventArgs.Empty);
+          onGameOver?.Invoke(this, EventArgs.Empty); Debug.Log("GameOver " + number_of_cards);
        }
    }
    else

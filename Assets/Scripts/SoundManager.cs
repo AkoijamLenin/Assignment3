@@ -32,6 +32,10 @@ public class SoundManager : MonoBehaviour
         GameManager.Instance.onGameOver += GameManager_onGameOver;
     }
 
+    public void Play_Card_FlipSound()
+    {
+        PlaySound(Camera.main.transform.position, card_Flip_Sound);
+    }
     private void GameManager_onGameOver(object sender, System.EventArgs e)
     {
         PlaySound(Camera.main.transform.position, game_Over_Sound);
@@ -47,7 +51,7 @@ public class SoundManager : MonoBehaviour
         PlaySound(Camera.main.transform.position, card_match_Sound); 
     }
 
-    public void PlaySound(Vector3 position,AudioClip audioclip,float volume=1)
+    private void PlaySound(Vector3 position,AudioClip audioclip,float volume=1)
     {
         AudioSource.PlayClipAtPoint(audioclip,position, volume);
     }

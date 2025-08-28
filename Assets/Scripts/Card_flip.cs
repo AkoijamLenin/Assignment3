@@ -33,7 +33,8 @@ public class Card_flip : MonoBehaviour
         }
         
         if (card_state==CardState.back)
-        {   
+        {
+            SoundManager.Instance.Play_Card_FlipSound();
             iscurrentlyChanging = true;
             animator.SetTrigger("FlipIn");
             SendCard();
@@ -58,6 +59,7 @@ public class Card_flip : MonoBehaviour
     }
     public void CardFLipBack_Animation()
     {
+        SoundManager.Instance.Play_Card_FlipSound();
         iscurrentlyChanging=true;
         //if(iscurrentlyChanging) return;
         animator.SetTrigger("FlipBack");

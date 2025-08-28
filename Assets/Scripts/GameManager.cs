@@ -8,7 +8,9 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance { get; private set; }
     public event EventHandler onCardMatch;
     public event EventHandler onCardMismatch; 
+    public event EventHandler onGameOver; 
     public event EventHandler<CellSize> onGridSelect;
+    private int number_of_cards;
     public class CellSize
     {
         public int row;
@@ -48,11 +50,16 @@ public class GameManager : MonoBehaviour
    IEnumerator checkCardMatch(Card_flip a, Card_flip b)
    {
    if (a.getID() == b.getID())
-   {
-       yield return new WaitForSeconds(0.1f);
+   {   
+       yield return new WaitForSeconds(0.2f);
        a.CardMatch_Animation();
        b.CardMatch_Animation();
        onCardMatch?.Invoke(this, EventArgs.Empty);
+       number_of_cards--;
+       if (number_of_cards == 0)
+       {
+          onGameOver?.Invoke(this, EventArgs.Empty);
+       }
    }
    else
    {
@@ -80,6 +87,7 @@ public class GameManager : MonoBehaviour
 
     public void Easyone()
     {
+        number_of_cards = 4;
         onGridSelect?.Invoke(this, new CellSize { 
             row=2,
             column=2 
@@ -88,6 +96,7 @@ public class GameManager : MonoBehaviour
     }
     public void Mediumone()
     {
+        number_of_cards = 6;
         onGridSelect?.Invoke(this, new CellSize
         {
             row = 2,
@@ -97,6 +106,7 @@ public class GameManager : MonoBehaviour
     }
     public void Hardone()
     {
+        number_of_cards = 30;
         onGridSelect?.Invoke(this, new CellSize
         {
             row = 5,

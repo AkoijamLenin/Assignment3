@@ -1745,10 +1745,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ebbe5d3a42a76f64682c89ef75446ef1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  card_Flip: {fileID: 0}
-  card_match: {fileID: 0}
-  card_mismatch: {fileID: 0}
-  game_Over: {fileID: 0}
+  card_Flip_Sound: {fileID: 8300000, guid: e88589de1e3149a4eafe25ecd2bcf87e, type: 3}
+  card_match_Sound: {fileID: 8300000, guid: 0b7ec408efdb6904896825c949d73c38, type: 3}
+  card_mismatch_Sound: {fileID: 8300000, guid: d8b3b17160d0ef94f83f59b10a0d13c7, type: 3}
+  game_Over_Sound: {fileID: 8300000, guid: 3cf92ec387f93674589d9e098d24242c, type: 3}
 --- !u!82 &2092135788
 AudioSource:
   m_ObjectHideFlags: 0

@@ -33,7 +33,7 @@ public class Card_flip : MonoBehaviour
         }
         
         if (card_state==CardState.back)
-        {
+        {   
             iscurrentlyChanging = true;
             animator.SetTrigger("FlipIn");
             SendCard();

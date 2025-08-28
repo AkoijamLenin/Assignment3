@@ -66,7 +66,7 @@ public class Card_flip : MonoBehaviour
     {
         animator.SetTrigger("CardMatch");
     }
-    public void CardMatch()
+    public void CardDestroy()
     {
         Destroy(this.gameObject);
        // gameObject.SetActive(false);

@@ -7,7 +7,7 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager Instance { get; private set; }
     public event EventHandler onCardMatch;
-    public event EventHandler onCardFlip; 
+    public event EventHandler onCardMismatch; 
     public event EventHandler<CellSize> onGridSelect;
     public class CellSize
     {
@@ -59,7 +59,7 @@ public class GameManager : MonoBehaviour
        yield return new WaitForSeconds(0.2f);
        a.CardFLipBack_Animation();
        b.CardFLipBack_Animation();
-       onCardFlip?.Invoke(this, EventArgs.Empty);
+       onCardMismatch?.Invoke(this, EventArgs.Empty);
 
    }
         CheckCardCount();

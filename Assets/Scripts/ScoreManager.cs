@@ -11,7 +11,7 @@ public class ScoreManager : MonoBehaviour
     int move;
     private void Start()
     {
-        GameManager.Instance.onCardFlip += GameManager_onCardFlip;
+        GameManager.Instance.onCardMismatch += GameManager_onCardFlip;
         GameManager.Instance.onCardMatch += GameManager_onCardMatch;
     }
 

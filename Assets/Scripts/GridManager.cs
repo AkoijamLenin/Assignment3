@@ -8,7 +8,7 @@ public class GridManager : MonoBehaviour
     //2X2 2X3 5X6
     
     [SerializeField] List<GameObject>cardPrefabs;
-    [SerializeField] List<GameObject>random_Selectable_Cards;
+    private List<GameObject>random_Selectable_Cards=new List<GameObject>();
     private int numberofCards;
     private int rows;
     private int column;

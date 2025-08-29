@@ -407,7 +407,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &102441610
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2955,10 +2955,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1a2acdf52ad5e8d4fabb3f80fb9e0b37, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  menu_Screen: {fileID: 1852690856}
+  Level_Select: {fileID: 1852690856}
   Easy: {fileID: 961527476}
   Medium: {fileID: 1563455921}
   Hard: {fileID: 2123793539}
+  GameOver: {fileID: 102441609}
+  Main_Menu_button: {fileID: 890339738}
+  Main_Menu: {fileID: 1208109750}
+  Play_button: {fileID: 506881609}
+  Load_button: {fileID: 724347463}
+  Quit_button: {fileID: 1026146138}
 --- !u!1 &1846915028
 GameObject:
   m_ObjectHideFlags: 0
@@ -3936,7 +3942,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1510032600367189759, guid: 36f17481853e71843882086f0d5dc982, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 1.604
+      value: -3.58
       objectReference: {fileID: 0}
     - target: {fileID: 1510032600367189759, guid: 36f17481853e71843882086f0d5dc982, type: 3}
       propertyPath: m_LocalPosition.y
@@ -3983,6 +3989,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1834992137664368616, guid: 4624cd7420f0a934bb40860dfa6ac3ed, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 997decd08fd62a04486cf36d1ddaff3d, type: 3}
+    - target: {fileID: 4873671624000083350, guid: 4624cd7420f0a934bb40860dfa6ac3ed, type: 3}
+      propertyPath: Front
+      value: 
+      objectReference: {fileID: 21300000, guid: 997decd08fd62a04486cf36d1ddaff3d, type: 3}
     - target: {fileID: 6638861637767933556, guid: 4624cd7420f0a934bb40860dfa6ac3ed, type: 3}
       propertyPath: m_Name
       value: CardsID_1
@@ -3997,7 +4011,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6638861637767933557, guid: 4624cd7420f0a934bb40860dfa6ac3ed, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: -1.38
       objectReference: {fileID: 0}
     - target: {fileID: 6638861637767933557, guid: 4624cd7420f0a934bb40860dfa6ac3ed, type: 3}
       propertyPath: m_LocalPosition.y

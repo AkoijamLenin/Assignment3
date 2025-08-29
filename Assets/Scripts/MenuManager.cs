@@ -5,45 +5,76 @@ using UnityEngine.UI;
 
 
 public class MenuManager : MonoBehaviour
-{
-    [SerializeField] GameObject menu_Screen;
+{   
+    [SerializeField] GameObject Level_Select;
     [SerializeField] Button Easy;
     [SerializeField] Button Medium;
     [SerializeField] Button Hard;
 
+    [SerializeField] GameObject GameOver;
+    [SerializeField] Button Main_Menu_button;
+
+    [SerializeField] GameObject Main_Menu;
+    [SerializeField] Button Play_button;
+    [SerializeField] Button Load_button;
+    [SerializeField] Button Quit_button;
+
     private void Awake()
     {
-        ShowMenu();
+        //ShowMenu();
+        ShowLevel_Selection();//will be deleated
         Easy.onClick.AddListener(() =>
         {
-            CloseMenu();
+            CloseLevel_Selection();
             GameManager.Instance.Easyone();
         });
 
         Medium.onClick.AddListener(() =>
         {
-            CloseMenu();
+            CloseLevel_Selection();
             GameManager.Instance.Mediumone();
         });
 
         Hard.onClick.AddListener(() =>
         {
-            CloseMenu();
+            CloseLevel_Selection();
             GameManager.Instance.Hardone();
         });
         
+
     }
 
 
         private void CloseMenu()
         {
-        menu_Screen.SetActive(false);
+        Main_Menu.SetActive(false);
         }
-    
         private void ShowMenu()
         {
-        menu_Screen.SetActive(true);
+        Main_Menu.SetActive(true);
         }
-
-
+        private void CloseLevel_Selection()
+        {
+        Level_Select.SetActive(false);
+        }
+        private void ShowLevel_Selection()
+        {
+        Level_Select.SetActive(true);
+        }
+    
+    
+    //TO be deleted 
+    
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            ShowLevel_Selection();
+            Debug.Log(" Cleared cards from MenuManager");
+        }
+    }
+    private void OnApplicationQuit()
+    {
+        Debug.Log("SAved");
+    }
 }

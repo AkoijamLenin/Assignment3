@@ -32,9 +32,9 @@ public class Card_flip : MonoBehaviour
             return;
         }
         
+        SoundManager.Instance.Play_Card_FlipSound();
         if (card_state==CardState.back)
         {
-            SoundManager.Instance.Play_Card_FlipSound();
             iscurrentlyChanging = true;
             animator.SetTrigger("FlipIn");
             SendCard();
@@ -43,7 +43,7 @@ public class Card_flip : MonoBehaviour
         else if(card_state==CardState.face)
         {
             CardFLipBack_Animation();
-            SendCard();
+            GameManager.Instance.Delete_From_Opened(this);
         }
     }
    

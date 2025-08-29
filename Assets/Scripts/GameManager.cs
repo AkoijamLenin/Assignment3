@@ -37,15 +37,10 @@ public class GameManager : MonoBehaviour
 
    public void AddToPair(Card_flip card)
     {
-        if (opened.Contains(card))
-        {
-            opened.Remove(card);
-            return;//new
-        }
+        if (opened.Contains(card)) return;//new
+        
         opened.Add(card);
         CheckCardCount();
-
-
    }
 
    IEnumerator checkCardMatch(Card_flip a, Card_flip b)
@@ -56,7 +51,7 @@ public class GameManager : MonoBehaviour
        a.CardMatch_Animation();
        b.CardMatch_Animation();
        onCardMatch?.Invoke(this, EventArgs.Empty);
-       number_of_cards-=2;Debug.Log("number of cards " + number_of_cards);
+       number_of_cards-=2;Debug.Log("number of cards " + number_of_cards);//will be deleated
        if (number_of_cards == 0)
        {
           onGameOver?.Invoke(this, EventArgs.Empty); Debug.Log("GameOver " + number_of_cards);
@@ -68,7 +63,6 @@ public class GameManager : MonoBehaviour
        a.CardFLipBack_Animation();
        b.CardFLipBack_Animation();
        onCardMismatch?.Invoke(this, EventArgs.Empty);
-
    }
         CheckCardCount();
    }
@@ -84,7 +78,13 @@ public class GameManager : MonoBehaviour
         }
     }
     //
-
+    public void Delete_From_Opened(Card_flip card)
+    {
+        if(opened.Count > 0&&opened.Contains(card))
+        {
+            opened.Remove(card);
+        }
+    }
 
     public void Easyone()
     {

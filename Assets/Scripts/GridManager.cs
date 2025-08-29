@@ -24,6 +24,7 @@ public class GridManager : MonoBehaviour
         column = e.column;
        
         Set_Selectable_Cards();
+        GameManager.Instance.SetCards(random_Selectable_Cards);
         GenerateGrid();
         
     }

@@ -11,6 +11,7 @@ public class GameManager : MonoBehaviour
     public event EventHandler onGameOver; 
     public event EventHandler<CellSize> onGridSelect;
     private int number_of_cards;
+    [SerializeField]private List<GameObject> All_Cards = new List<GameObject>();
     public class CellSize
     {
         public int row;
@@ -59,7 +60,7 @@ public class GameManager : MonoBehaviour
        if (number_of_cards == 0)
        {
           onGameOver?.Invoke(this, EventArgs.Empty); Debug.Log("GameOver " + number_of_cards);
-       }
+       }     
    }
    else
    {
@@ -114,4 +115,10 @@ public class GameManager : MonoBehaviour
         });
 
     }
+    public void SetCards(List<GameObject>All_Cards)
+    {
+        this.All_Cards = new List<GameObject>(All_Cards);
+          
+    }
+
 }

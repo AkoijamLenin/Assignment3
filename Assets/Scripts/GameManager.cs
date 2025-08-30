@@ -36,7 +36,6 @@ public class GameManager : MonoBehaviour
         }
         Instance = this;
     }
-
     private void Start()
     {
         opened = new List<Card_flip>();
@@ -78,7 +77,6 @@ public class GameManager : MonoBehaviour
         }
          CheckCardCount();
     }
-   
     public void CheckCardCount()
     {
         if (opened.Count >= 2)
@@ -147,13 +145,9 @@ public class GameManager : MonoBehaviour
             }
         }
     }
-    private void OnApplicationQuit()
+    public void SaveGame()
     {
-        if(GameStart)
-        SaveGame();
-    }
-    private void SaveGame()
-    {
+        if (!GameStart) return;
         GameData gameData_Obj = new GameData();
         gameData_Obj.cards = new List<CardData>();
         foreach(GameObject temp_cards in All_Cards)

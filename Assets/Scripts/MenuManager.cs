@@ -23,6 +23,8 @@ public class MenuManager : MonoBehaviour
     [SerializeField] GameObject No_SaveData_Screen;
     [SerializeField] Button cross_button;
 
+    [SerializeField] Button Save_button;
+
     [SerializeField] SoundManager soundManager;
 
     private void Awake()
@@ -82,6 +84,11 @@ public class MenuManager : MonoBehaviour
         cross_button.onClick.AddListener(() =>
         {
             Close_No_Save_Screen();
+        });
+
+        Save_button.onClick.AddListener(() =>
+        {
+            GameManager.Instance.SaveGame();
         });
     }
     private void Start()

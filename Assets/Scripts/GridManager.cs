@@ -9,6 +9,7 @@ public class GridManager : MonoBehaviour
     
     [SerializeField] List<GameObject>cardPrefabs;
     private List<GameObject>random_Selectable_Cards=new List<GameObject>();
+    private List<GameObject> spawnedCards = new List<GameObject>();
     private int numberofCards;
     private int rows;
     private int column;
@@ -24,8 +25,8 @@ public class GridManager : MonoBehaviour
         column = e.column;
        
         Set_Selectable_Cards();
-        GameManager.Instance.SetCards(random_Selectable_Cards);
         GenerateGrid();
+        GameManager.Instance.SetCards(spawnedCards);
         
     }
 
@@ -59,6 +60,7 @@ public class GridManager : MonoBehaviour
                 random_Selectable_Cards.Remove(random_Selectable_Cards[random_Pos]);
                 GameObject card =Instantiate(randomCard, new Vector3(_posX, _posY, 0), Quaternion.identity);
                 card.transform.localScale = new Vector3(finalScale, finalScale+0.5f, 0f);
+                spawnedCards.Add(card);
              }
         }
     }

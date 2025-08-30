@@ -61,7 +61,6 @@ public class Card_flip : MonoBehaviour
     {
         SoundManager.Instance.Play_Card_FlipSound();
         iscurrentlyChanging=true;
-        //if(iscurrentlyChanging) return;
         animator.SetTrigger("FlipBack");
     }
     public void CardMatch_Animation()
@@ -70,6 +69,7 @@ public class Card_flip : MonoBehaviour
     }
     public void CardDestroy()
     {
+        GameManager.Instance.RemoveCard(this.gameObject);
         Destroy(this.gameObject);
        // gameObject.SetActive(false);
     }

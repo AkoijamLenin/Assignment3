@@ -10,8 +10,8 @@ public class GameManager : MonoBehaviour
     public event EventHandler onCardMismatch; 
     public event EventHandler onGameOver; 
     public event EventHandler<CellSize> onGridSelect;
-    private int number_of_cards;
-    [SerializeField]private List<GameObject> All_Cards = new List<GameObject>();
+    private List<Card_flip> opened;
+    private List<GameObject> All_Cards = new List<GameObject>();
     public class CellSize
     {
         public int row;
@@ -28,7 +28,6 @@ public class GameManager : MonoBehaviour
         Instance = this;
     }
 
-    private List<Card_flip> opened;
     private void Start()
     {
         opened = new List<Card_flip>();
@@ -37,12 +36,10 @@ public class GameManager : MonoBehaviour
 
    public void AddToPair(Card_flip card)
     {
-        if (opened.Contains(card)) return;//new
-        
+        if (opened.Contains(card)) return;//new       
         opened.Add(card);
         CheckCardCount();
    }
-
    IEnumerator checkCardMatch(Card_flip a, Card_flip b)
    {
    if (a.getID() == b.getID())
@@ -51,11 +48,6 @@ public class GameManager : MonoBehaviour
        a.CardMatch_Animation();
        b.CardMatch_Animation();
        onCardMatch?.Invoke(this, EventArgs.Empty);
-       number_of_cards-=2;Debug.Log("number of cards " + number_of_cards);//will be deleated
-       if (number_of_cards == 0)
-       {
-          onGameOver?.Invoke(this, EventArgs.Empty); Debug.Log("GameOver " + number_of_cards);
-       }     
    }
    else
    {
@@ -88,7 +80,6 @@ public class GameManager : MonoBehaviour
 
     public void Easyone()
     {
-        number_of_cards = 4;
         onGridSelect?.Invoke(this, new CellSize { 
             row=2,
             column=2 
@@ -97,7 +88,6 @@ public class GameManager : MonoBehaviour
     }
     public void Mediumone()
     {
-        number_of_cards = 6;
         onGridSelect?.Invoke(this, new CellSize
         {
             row = 2,
@@ -107,7 +97,6 @@ public class GameManager : MonoBehaviour
     }
     public void Hardone()
     {
-        number_of_cards = 30;
         onGridSelect?.Invoke(this, new CellSize
         {
             row = 5,
@@ -119,6 +108,17 @@ public class GameManager : MonoBehaviour
     {
         this.All_Cards = new List<GameObject>(All_Cards);
           
+    }
+    public void RemoveCard(GameObject card)
+    {
+        if (All_Cards.Contains(card))
+        {
+            All_Cards.Remove(card);
+            if (All_Cards.Count == 0)
+            {
+                onGameOver?.Invoke(this, EventArgs.Empty);
+            }
+        }
     }
 
 }

@@ -23,10 +23,10 @@ public class GridManager : MonoBehaviour
     {
         rows=e.row;
         column = e.column;
-       
+        spawnedCards.Clear();
         Set_Selectable_Cards();
         GenerateGrid();
-        GameManager.Instance.SetCards(spawnedCards);
+        GameManager.Instance.StartGame(spawnedCards);
         
     }
 

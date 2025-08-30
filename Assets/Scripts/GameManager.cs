@@ -41,9 +41,11 @@ public class GameManager : MonoBehaviour
     {
         opened = new List<Card_flip>();
     }
+
+
     //
 
-   public void AddToPair(Card_flip card)
+    public void AddToPair(Card_flip card)
     {
         if (opened.Contains(card)) return;//new       
         opened.Add(card);
@@ -125,8 +127,13 @@ public class GameManager : MonoBehaviour
         });
 
     }
-    public void SetCards(List<GameObject>All_Cards)
+    public void StartGame(List<GameObject>All_Cards)
     {
+        onGameLoad?.Invoke(this, new CardActionEventArgs
+        {
+            moves = moves,
+            points = points,
+        });
         GameStart = true;
         this.All_Cards = new List<GameObject>(All_Cards);
           
@@ -138,6 +145,8 @@ public class GameManager : MonoBehaviour
             All_Cards.Remove(card);
             if (All_Cards.Count == 0)
             {
+                moves = 0;
+                points = 0;
                 GameStart = false;
                 onGameOver?.Invoke(this, EventArgs.Empty);
             }
@@ -145,7 +154,7 @@ public class GameManager : MonoBehaviour
     }
     private void OnApplicationQuit()
     {
-        if(GameStart)
+        if(GameStart)//Set to false when menu is open
         SaveGame();
     }
     private void SaveGame()
@@ -204,6 +213,8 @@ public class GameManager : MonoBehaviour
         {
             LoadGame();
         }
+        //There is bug where when gameover the ui is still set to 0,the game Ui is still set not start from 0
+       
     }
 
 }

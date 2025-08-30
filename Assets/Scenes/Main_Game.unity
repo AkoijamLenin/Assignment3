@@ -2407,7 +2407,6 @@ MonoBehaviour:
   - {fileID: 6638861637767933556, guid: 4624cd7420f0a934bb40860dfa6ac3ed, type: 3}
   - {fileID: 1510032600367189755, guid: 36f17481853e71843882086f0d5dc982, type: 3}
   - {fileID: 3051415113537531843, guid: 7860abf226a1e3240a4a1561336da63b, type: 3}
-  random_Selectable_Cards: []
 --- !u!4 &1120292677
 Transform:
   m_ObjectHideFlags: 0
@@ -3574,6 +3573,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bfaafe7957dda4a47b5b21ae7f1558cd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  cardPrefab: {fileID: 5767201014133381817, guid: ed8b09619a19be74a9c4a20e6cdc0d6f, type: 3}
 --- !u!4 &2072948993
 Transform:
   m_ObjectHideFlags: 0

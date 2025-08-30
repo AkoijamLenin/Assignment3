@@ -38,4 +38,5 @@ public class ScoreManager : MonoBehaviour
         point++;
         points.text = "Points: " + point;
     }
+  
 }

@@ -57,6 +57,15 @@ public class Card_flip : MonoBehaviour
         return card_id;
 
     }
+    public Sprite getSprite()
+    {
+        return Front;
+    }
+    public void Card_SetUp(int ID,Sprite sprite)
+    {
+        card_id=ID;
+        Front=sprite;
+    }
     public void CardFLipBack_Animation()
     {
         SoundManager.Instance.Play_Card_FlipSound();

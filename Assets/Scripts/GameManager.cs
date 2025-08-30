@@ -13,12 +13,13 @@ public class GameManager : MonoBehaviour
     private List<Card_flip> opened;
     private List<GameObject> All_Cards = new List<GameObject>();
     private bool GameStart;
+    [SerializeField] private GameObject cardPrefab;
     public class CellSize
     {
         public int row;
         public int column;
     }
-
+    
     private void Awake()
     {
         if (Instance != null && Instance != this)
@@ -138,7 +139,7 @@ public class GameManager : MonoBehaviour
         Card_flip card=temp_cards.GetComponent<Card_flip>();
 
         c.id=card.getID();
-        c.state =card.card_state.ToString();
+        c.sprite = card.getSprite();
         c.x = card.transform.position.x;
         c.y = card.transform.position.y;
         c.z = card.transform.position.z;
@@ -147,8 +148,36 @@ public class GameManager : MonoBehaviour
 
         }
         Debug.Log(gameData_Obj.cards.Count);
+        SaveSystem.SaveGame(gameData_Obj);
+    }
+    private void LoadGame()
+    {
+        GameData game_Data=SaveSystem.LoadGame();
+        if (game_Data == null)
+        {
+            Debug.Log("No saved game found");
+            return;
+        }
+        foreach (GameObject cardObj in All_Cards)
+        {
+            if (cardObj != null) Destroy(cardObj);
+        }
+        All_Cards.Clear();
+        foreach (CardData c in game_Data.cards)
+        {
+            GameObject cardObj = Instantiate(cardPrefab, new Vector3(c.x, c.y, c.z), Quaternion.identity);
+            Card_flip card = cardObj.GetComponent<Card_flip>();
+            card.Card_SetUp(c.id,c.sprite);
+            All_Cards.Add(cardObj);
+        }
       
     }
-
+    private void Update()//To be Deleated for Debugging purpose only
+    {
+        if (Input.GetKeyDown(KeyCode.L))
+        {
+            LoadGame();
+        }
+    }
 
 }

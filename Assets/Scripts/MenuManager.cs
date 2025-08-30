@@ -72,5 +72,6 @@ public class MenuManager : MonoBehaviour
             ShowLevel_Selection();
             Debug.Log(" Cleared cards from MenuManager");
         }
+       
     }
 }

@@ -1,18 +1,30 @@
-using System.Collections;
-using System.Collections.Generic;
+using System.IO;
 using UnityEngine;
 
-public class SaveSystem : MonoBehaviour
+public static class SaveSystem
 {
-    // Start is called before the first frame update
-    void Start()
+    private static string path = Application.persistentDataPath + "/save.json";
+
+    public static void SaveGame(GameData data)
     {
-        
+        string json = JsonUtility.ToJson(data, true);
+        File.WriteAllText(path, json);
+        Debug.Log("Game Saved: " + path);
     }
 
-    // Update is called once per frame
-    void Update()
+    public static GameData LoadGame()
     {
-        
+        if (File.Exists(path))
+        {
+            string json = File.ReadAllText(path);
+            return JsonUtility.FromJson<GameData>(json);
+        }
+        Debug.LogWarning("No save file found!");
+        return null;
+    }
+
+    public static void DeleteSave()
+    {
+        if (File.Exists(path)) File.Delete(path);
     }
 }

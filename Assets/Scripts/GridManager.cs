@@ -3,17 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class GridManager : MonoBehaviour
-{
-
-    //2X2 2X3 5X6
-    
+{ 
     [SerializeField] List<GameObject>cardPrefabs;
     private List<GameObject>random_Selectable_Cards=new List<GameObject>();
     private List<GameObject> spawnedCards = new List<GameObject>();
     private int numberofCards;
     private int rows;
     private int column;
-    private float top_Offset=2f;// Its to add a offset gap from the top so that the cards stay in screen 
+    private float top_Offset=2f;
     void Start()
     {
         GameManager.Instance.onGridSelect += GameManager_onGridSelect;
@@ -26,14 +23,12 @@ public class GridManager : MonoBehaviour
         spawnedCards.Clear();
         Set_Selectable_Cards();
         GenerateGrid();
-        GameManager.Instance.StartGame(spawnedCards);
-        
+        GameManager.Instance.StartGame(spawnedCards);     
     }
-
     void GenerateGrid()
     {
         float camHeight = Camera.main.orthographicSize * 2f;
-        camHeight = camHeight - top_Offset;//
+        camHeight = camHeight - top_Offset;
         float camWidth =camHeight * Camera.main.aspect;
         float cellWidth =camWidth / column;
         float cellHeight =camHeight /rows;
@@ -41,11 +36,8 @@ public class GridManager : MonoBehaviour
         SpriteRenderer sr = cardPrefabs[0].GetComponentInChildren<SpriteRenderer>();
         Vector2 cardSize = sr.bounds.size;
         float scaleX = cellWidth /cardSize.x;
-        float scaleY = cellHeight  / cardSize.y ;//new
+        float scaleY = cellHeight  / cardSize.y ;
         float finalScale=  Mathf.Min(scaleX, scaleY); 
-
-       //
-
 
         for (int j=0;j<rows;j++)
         {
@@ -64,18 +56,14 @@ public class GridManager : MonoBehaviour
              }
         }
     }
-
-   
     void Set_Selectable_Cards()
     {
         List<GameObject>temp=new List<GameObject>(cardPrefabs);
         numberofCards = rows * column;
         
-
         for (int i = 0; i < numberofCards;)
         {
             int random_Pos = Random.Range(0,temp.Count);
-            Debug.Log("count temp =" + temp.Count);
             GameObject randomCard = temp[random_Pos];
             temp.Remove(temp[random_Pos]);
             if (temp.Count == 0) temp = new List<GameObject>(cardPrefabs); 

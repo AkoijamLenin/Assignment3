@@ -42,7 +42,6 @@ public class SoundManager : MonoBehaviour
             PlaySound(card_mismatch_Sound);
         }
     }
-
     public void Play_Card_FlipSound()
     {
         PlaySound(card_Flip_Sound);
@@ -51,17 +50,14 @@ public class SoundManager : MonoBehaviour
     {
         PlaySound(game_Over_Sound);
     }
-
     private void GameManager_onCardMismatch(object sender, System.EventArgs e)
     {
         PlaySound(card_mismatch_Sound);
     }
-
     private void GameManager_onCardMatch(object sender, System.EventArgs e)
     {
         PlaySound(card_match_Sound); 
     }
-
     private void PlaySound(AudioClip audioclip,float volume=1)
     {
         audioSource.PlayOneShot(audioclip, volume);

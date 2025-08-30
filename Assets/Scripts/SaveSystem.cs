@@ -19,10 +19,8 @@ public static class SaveSystem
             string json = File.ReadAllText(path);
             return JsonUtility.FromJson<GameData>(json);
         }
-        Debug.LogWarning("No save file found!");
         return null;
     }
-
     public static void DeleteSave()
     {
         if (File.Exists(path)) File.Delete(path);

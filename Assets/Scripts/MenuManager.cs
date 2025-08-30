@@ -17,7 +17,11 @@ public class MenuManager : MonoBehaviour
     [SerializeField] GameObject Main_Menu;
     [SerializeField] Button Play_button;
     [SerializeField] Button Load_button;
+    [SerializeField] Button DeleteSave_button;
     [SerializeField] Button Quit_button;
+
+    [SerializeField] GameObject No_SaveData_Screen;
+    [SerializeField] Button cross_button;
 
     [SerializeField] SoundManager soundManager;
 
@@ -26,6 +30,7 @@ public class MenuManager : MonoBehaviour
         ShowMenu();
         CloseGameOver();
         CloseLevel_Selection();
+        Close_No_Save_Screen();
  
         Easy.onClick.AddListener(() =>
         {
@@ -50,8 +55,17 @@ public class MenuManager : MonoBehaviour
         });
         Load_button.onClick.AddListener(() =>
         {
+            if (SaveSystem.LoadGame() == null)
+            {
+                Show_No_Save_Screen();
+                return;
+            } 
             CloseMenu();
             GameManager.Instance.LoadGame();
+        });
+        DeleteSave_button.onClick.AddListener(() =>
+        {
+           SaveSystem.DeleteSave();
         });
         Quit_button.onClick.AddListener(() =>
         {
@@ -63,6 +77,11 @@ public class MenuManager : MonoBehaviour
             soundManager.stopSound();
             CloseGameOver();
             ShowMenu();
+        });
+
+        cross_button.onClick.AddListener(() =>
+        {
+            Close_No_Save_Screen();
         });
     }
     private void Start()
@@ -96,5 +115,13 @@ public class MenuManager : MonoBehaviour
     private void CloseGameOver()
     {
         GameOver.SetActive(false);
+    }
+    private void Show_No_Save_Screen()
+    {
+        No_SaveData_Screen.SetActive(true);
+    }
+    private void Close_No_Save_Screen()
+    {
+        No_SaveData_Screen.SetActive(false);
     }
 }

@@ -89,7 +89,6 @@ public class GameManager : MonoBehaviour
             StartCoroutine(checkCardMatch(first_Card, second_Card));
         }
     }
-    //
     public void Delete_From_Opened(Card_flip card)
     {
         if(opened.Count > 0&&opened.Contains(card))
@@ -155,7 +154,6 @@ public class GameManager : MonoBehaviour
     }
     private void SaveGame()
     {
-        Debug.Log("Game SAVE");
         GameData gameData_Obj = new GameData();
         gameData_Obj.cards = new List<CardData>();
         foreach(GameObject temp_cards in All_Cards)
@@ -171,7 +169,6 @@ public class GameManager : MonoBehaviour
         }
         gameData_Obj.points=points;
         gameData_Obj.moves=moves;
-        Debug.Log(gameData_Obj.cards.Count);
         SaveSystem.SaveGame(gameData_Obj);
     }
     public void LoadGame()
@@ -179,7 +176,6 @@ public class GameManager : MonoBehaviour
         GameData game_Data=SaveSystem.LoadGame();
         if (game_Data == null)
         {
-            Debug.Log("No saved game found");
             return;
         }
         GameStart = true;

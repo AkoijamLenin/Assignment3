@@ -13,7 +13,7 @@ public class Card_flip : MonoBehaviour
     [SerializeField] Sprite BackGround; 
     [SerializeField] Sprite Front; 
    
-    bool iscurrentlyChanging;//I add this so that we can't spam the mouse and the animation finishes playing
+    bool iscurrentlyChanging;
     public enum CardState
     {
         face,
@@ -31,14 +31,12 @@ public class Card_flip : MonoBehaviour
         {
             return;
         }
-        
         SoundManager.Instance.Play_Card_FlipSound();
         if (card_state==CardState.back)
         {
             iscurrentlyChanging = true;
             animator.SetTrigger("FlipIn");
-            SendCard();
-         
+            SendCard(); 
         }
         else if(card_state==CardState.face)
         {
@@ -46,11 +44,9 @@ public class Card_flip : MonoBehaviour
             GameManager.Instance.Delete_From_Opened(this);
         }
     }
-   
     private void SendCard()
     {
-        GameManager.Instance.AddToPair(this);
-      
+        GameManager.Instance.AddToPair(this);  
     }
     public int getID()
     {
@@ -80,14 +76,11 @@ public class Card_flip : MonoBehaviour
     {
         GameManager.Instance.RemoveCard(this.gameObject);
         Destroy(this.gameObject);
-       // gameObject.SetActive(false);
     }
-  
     public void Face()
     {
         iscurrentlyChanging = false;
         card_state = CardState.face;
-      
     }
     public void Back()
     {

@@ -165,6 +165,8 @@ public class GameManager : MonoBehaviour
             c.x = card.transform.position.x;
             c.y = card.transform.position.y;
             c.z = card.transform.position.z;
+            c.scale_x= card.transform.localScale.x;
+            c.scale_y= card.transform.localScale.y;
             gameData_Obj.cards.Add(c);
         }
         gameData_Obj.points=points;
@@ -195,6 +197,7 @@ public class GameManager : MonoBehaviour
         {
             GameObject cardObj = Instantiate(cardPrefab, new Vector3(c.x, c.y, c.z), Quaternion.identity);
             Card_flip card = cardObj.GetComponent<Card_flip>();
+            card.transform.localScale=new Vector3(c.scale_x,c.scale_y,0f);
             card.Card_SetUp(c.id,c.sprite);
             All_Cards.Add(cardObj);
         }

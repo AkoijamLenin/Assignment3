@@ -7,6 +7,7 @@ public class CardData
     public int id;
     public Sprite sprite;
     public float x, y, z;
+    public float scale_x, scale_y;
 }
 
 [System.Serializable]

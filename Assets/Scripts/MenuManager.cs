@@ -73,8 +73,4 @@ public class MenuManager : MonoBehaviour
             Debug.Log(" Cleared cards from MenuManager");
         }
     }
-    private void OnApplicationQuit()
-    {
-        Debug.Log("SAved");
-    }
 }

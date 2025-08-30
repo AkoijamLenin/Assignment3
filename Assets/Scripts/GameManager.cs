@@ -12,6 +12,7 @@ public class GameManager : MonoBehaviour
     public event EventHandler<CellSize> onGridSelect;
     private List<Card_flip> opened;
     private List<GameObject> All_Cards = new List<GameObject>();
+    private bool GameStart;
     public class CellSize
     {
         public int row;
@@ -77,7 +78,6 @@ public class GameManager : MonoBehaviour
             opened.Remove(card);
         }
     }
-
     public void Easyone()
     {
         onGridSelect?.Invoke(this, new CellSize { 
@@ -106,6 +106,7 @@ public class GameManager : MonoBehaviour
     }
     public void SetCards(List<GameObject>All_Cards)
     {
+        GameStart = true;
         this.All_Cards = new List<GameObject>(All_Cards);
           
     }
@@ -116,9 +117,38 @@ public class GameManager : MonoBehaviour
             All_Cards.Remove(card);
             if (All_Cards.Count == 0)
             {
+                GameStart = false;
                 onGameOver?.Invoke(this, EventArgs.Empty);
             }
         }
     }
+    private void OnApplicationQuit()
+    {
+        if(GameStart)
+        SaveGame();
+    }
+    private void SaveGame()
+    {
+        Debug.Log("Game SAVE");
+        GameData gameData_Obj = new GameData();
+        gameData_Obj.cards = new List<CardData>();
+        foreach(GameObject temp_cards in All_Cards)
+        {
+        CardData c=new CardData();
+        Card_flip card=temp_cards.GetComponent<Card_flip>();
+
+        c.id=card.getID();
+        c.state =card.card_state.ToString();
+        c.x = card.transform.position.x;
+        c.y = card.transform.position.y;
+        c.z = card.transform.position.z;
+
+        gameData_Obj.cards.Add(c);
+
+        }
+        Debug.Log(gameData_Obj.cards.Count);
+      
+    }
+
 
 }

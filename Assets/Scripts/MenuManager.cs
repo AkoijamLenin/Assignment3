@@ -61,17 +61,4 @@ public class MenuManager : MonoBehaviour
         {
         Level_Select.SetActive(true);
         }
-    
-    
-    //TO be deleted 
-    
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Escape))
-        {
-            ShowLevel_Selection();
-            Debug.Log(" Cleared cards from MenuManager");
-        }
-       
-    }
 }

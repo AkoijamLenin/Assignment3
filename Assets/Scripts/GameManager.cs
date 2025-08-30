@@ -6,20 +6,27 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance { get; private set; }
-    public event EventHandler onCardMatch;
-    public event EventHandler onCardMismatch; 
+    public event EventHandler<CardActionEventArgs> onCardCheck;
+    public event EventHandler<CardActionEventArgs> onGameLoad;
     public event EventHandler onGameOver; 
     public event EventHandler<CellSize> onGridSelect;
     private List<Card_flip> opened;
     private List<GameObject> All_Cards = new List<GameObject>();
     private bool GameStart;
+    private int points;
+    private int moves;
     [SerializeField] private GameObject cardPrefab;
     public class CellSize
     {
         public int row;
         public int column;
     }
-    
+    public class CardActionEventArgs
+    {
+        public int points;
+        public int moves;
+        public bool isMatched;
+    }
     private void Awake()
     {
         if (Instance != null && Instance != this)
@@ -44,22 +51,35 @@ public class GameManager : MonoBehaviour
    }
    IEnumerator checkCardMatch(Card_flip a, Card_flip b)
    {
-   if (a.getID() == b.getID())
-   {   
-       yield return new WaitForSeconds(0.2f);
-       a.CardMatch_Animation();
-       b.CardMatch_Animation();
-       onCardMatch?.Invoke(this, EventArgs.Empty);
-   }
-   else
-   {
-       yield return new WaitForSeconds(0.2f);
-       a.CardFLipBack_Animation();
-       b.CardFLipBack_Animation();
-       onCardMismatch?.Invoke(this, EventArgs.Empty);
-   }
-        CheckCardCount();
-   }
+        if (a.getID() == b.getID())
+        {
+            yield return new WaitForSeconds(0.2f);
+            a.CardMatch_Animation();
+            b.CardMatch_Animation();
+            points++;
+            moves++;
+            onCardCheck?.Invoke(this, new CardActionEventArgs 
+            {
+                points = points,
+                moves = moves,
+                isMatched = true
+            });
+        }
+        else
+        {
+            yield return new WaitForSeconds(0.2f);
+            a.CardFLipBack_Animation();
+            b.CardFLipBack_Animation();
+            moves++;
+            onCardCheck?.Invoke(this, new CardActionEventArgs 
+            { 
+                points = points,
+                moves = moves,
+                isMatched = false
+            });
+        }
+         CheckCardCount();
+        }
    
     public void CheckCardCount()
     {
@@ -135,34 +155,41 @@ public class GameManager : MonoBehaviour
         gameData_Obj.cards = new List<CardData>();
         foreach(GameObject temp_cards in All_Cards)
         {
-        CardData c=new CardData();
-        Card_flip card=temp_cards.GetComponent<Card_flip>();
-
-        c.id=card.getID();
-        c.sprite = card.getSprite();
-        c.x = card.transform.position.x;
-        c.y = card.transform.position.y;
-        c.z = card.transform.position.z;
-
-        gameData_Obj.cards.Add(c);
-
+            CardData c=new CardData();
+            Card_flip card=temp_cards.GetComponent<Card_flip>();
+            c.id=card.getID();
+            c.sprite = card.getSprite();
+            c.x = card.transform.position.x;
+            c.y = card.transform.position.y;
+            c.z = card.transform.position.z;
+            gameData_Obj.cards.Add(c);
         }
+        gameData_Obj.points=points;
+        gameData_Obj.moves=moves;
         Debug.Log(gameData_Obj.cards.Count);
         SaveSystem.SaveGame(gameData_Obj);
     }
     private void LoadGame()
-    {
+    {   
         GameData game_Data=SaveSystem.LoadGame();
         if (game_Data == null)
         {
             Debug.Log("No saved game found");
             return;
         }
+        GameStart = true;
         foreach (GameObject cardObj in All_Cards)
         {
             if (cardObj != null) Destroy(cardObj);
         }
         All_Cards.Clear();
+        moves=game_Data.moves;
+        points=game_Data.points;
+        onGameLoad?.Invoke(this, new CardActionEventArgs
+        {
+            points = points,
+            moves = moves,
+        });
         foreach (CardData c in game_Data.cards)
         {
             GameObject cardObj = Instantiate(cardPrefab, new Vector3(c.x, c.y, c.z), Quaternion.identity);
@@ -170,7 +197,6 @@ public class GameManager : MonoBehaviour
             card.Card_SetUp(c.id,c.sprite);
             All_Cards.Add(cardObj);
         }
-      
     }
     private void Update()//To be Deleated for Debugging purpose only
     {

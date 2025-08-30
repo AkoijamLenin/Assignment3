@@ -27,9 +27,20 @@ public class SoundManager : MonoBehaviour
     }
     private void Start()
     {
-        GameManager.Instance.onCardMatch += GameManager_onCardMatch;
-        GameManager.Instance.onCardMismatch += GameManager_onCardMismatch;
+        GameManager.Instance.onCardCheck += GameManager_onCardCheck;
         GameManager.Instance.onGameOver += GameManager_onGameOver;
+    }
+
+    private void GameManager_onCardCheck(object sender, GameManager.CardActionEventArgs e)
+    {
+        if (e.isMatched)
+        {
+            PlaySound(Camera.main.transform.position, card_match_Sound);
+        }
+        else
+        {
+            PlaySound(Camera.main.transform.position, card_mismatch_Sound);
+        }
     }
 
     public void Play_Card_FlipSound()

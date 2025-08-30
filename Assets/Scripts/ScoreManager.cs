@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Drawing;
 using TMPro;
 using UnityEngine;
 
@@ -7,36 +8,22 @@ public class ScoreManager : MonoBehaviour
 {
     [SerializeField]TextMeshProUGUI points;
     [SerializeField]TextMeshProUGUI moves;
-    int point;
-    int move;
+   
     private void Start()
     {
-        GameManager.Instance.onCardMismatch += GameManager_onCardFlip;
-        GameManager.Instance.onCardMatch += GameManager_onCardMatch;
+        GameManager.Instance.onCardCheck += GameManager_onCardCheck;
+        GameManager.Instance.onGameLoad += GameManager_onGameLoad;
     }
 
-    private void GameManager_onCardMatch(object sender, System.EventArgs e)
+    private void GameManager_onGameLoad(object sender, GameManager.CardActionEventArgs e)
     {
-       
-       increasePoint_Score();
-       increaseMove_Score(); 
-      
+        moves.text = "Moves: " + e.moves;
+        points.text = "Points: " + e.points;
     }
+    private void GameManager_onCardCheck(object sender, GameManager.CardActionEventArgs e)
+    {
+        moves.text = "Moves: " + e.moves;
+        points.text = "Points: " + e.points;
 
-    private void GameManager_onCardFlip(object sender, System.EventArgs e)
-    {
-        increaseMove_Score();
     }
-
-    void increaseMove_Score()
-    {
-        move++;
-        moves.text = "Moves: " + move;
-    }
-    void increasePoint_Score()
-    {
-        point++;
-        points.text = "Points: " + point;
-    }
-  
 }

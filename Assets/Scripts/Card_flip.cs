@@ -1,11 +1,11 @@
-using Microsoft.Unity.VisualStudio.Editor;
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UIElements;
 
-public class Card_flip : MonoBehaviour
+public class Card_flip : MonoBehaviour,IPointerDownHandler
 {
     [SerializeField] Animator animator;
     [SerializeField] int card_id;
@@ -25,7 +25,7 @@ public class Card_flip : MonoBehaviour
      card_state = CardState.back;
      cardsprite.sprite = BackGround; 
     }
-    private void OnMouseDown()
+    public void OnPointerDown(PointerEventData eventData)
     {
         if (iscurrentlyChanging)
         {
@@ -42,7 +42,7 @@ public class Card_flip : MonoBehaviour
         {
             CardFLipBack_Animation();
             GameManager.Instance.Delete_From_Opened(this);
-        }
+        }    
     }
     private void SendCard()
     {
@@ -99,4 +99,5 @@ public class Card_flip : MonoBehaviour
             cardsprite.sprite = BackGround;
         }
     }
+
 }

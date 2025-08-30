@@ -41,18 +41,14 @@ public class GameManager : MonoBehaviour
     {
         opened = new List<Card_flip>();
     }
-
-
-    //
-
     public void AddToPair(Card_flip card)
     {
         if (opened.Contains(card)) return;//new       
         opened.Add(card);
         CheckCardCount();
    }
-   IEnumerator checkCardMatch(Card_flip a, Card_flip b)
-   {
+    IEnumerator checkCardMatch(Card_flip a, Card_flip b)
+    {
         if (a.getID() == b.getID())
         {
             yield return new WaitForSeconds(0.2f);
@@ -81,7 +77,7 @@ public class GameManager : MonoBehaviour
             });
         }
          CheckCardCount();
-        }
+    }
    
     public void CheckCardCount()
     {
@@ -154,7 +150,7 @@ public class GameManager : MonoBehaviour
     }
     private void OnApplicationQuit()
     {
-        if(GameStart)//Set to false when menu is open
+        if(GameStart)
         SaveGame();
     }
     private void SaveGame()
@@ -178,7 +174,7 @@ public class GameManager : MonoBehaviour
         Debug.Log(gameData_Obj.cards.Count);
         SaveSystem.SaveGame(gameData_Obj);
     }
-    private void LoadGame()
+    public void LoadGame()
     {   
         GameData game_Data=SaveSystem.LoadGame();
         if (game_Data == null)
@@ -207,14 +203,4 @@ public class GameManager : MonoBehaviour
             All_Cards.Add(cardObj);
         }
     }
-    private void Update()//To be Deleated for Debugging purpose only
-    {
-        if (Input.GetKeyDown(KeyCode.L))
-        {
-            LoadGame();
-        }
-        //There is bug where when gameover the ui is still set to 0,the game Ui is still set not start from 0
-       
-    }
-
 }

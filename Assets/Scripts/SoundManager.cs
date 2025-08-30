@@ -35,35 +35,39 @@ public class SoundManager : MonoBehaviour
     {
         if (e.isMatched)
         {
-            PlaySound(Camera.main.transform.position, card_match_Sound);
+            PlaySound(card_match_Sound);
         }
         else
         {
-            PlaySound(Camera.main.transform.position, card_mismatch_Sound);
+            PlaySound(card_mismatch_Sound);
         }
     }
 
     public void Play_Card_FlipSound()
     {
-        PlaySound(Camera.main.transform.position, card_Flip_Sound);
+        PlaySound(card_Flip_Sound);
     }
     private void GameManager_onGameOver(object sender, System.EventArgs e)
     {
-        PlaySound(Camera.main.transform.position, game_Over_Sound);
+        PlaySound(game_Over_Sound);
     }
 
     private void GameManager_onCardMismatch(object sender, System.EventArgs e)
     {
-        PlaySound(Camera.main.transform.position,card_mismatch_Sound);
+        PlaySound(card_mismatch_Sound);
     }
 
     private void GameManager_onCardMatch(object sender, System.EventArgs e)
     {
-        PlaySound(Camera.main.transform.position, card_match_Sound); 
+        PlaySound(card_match_Sound); 
     }
 
-    private void PlaySound(Vector3 position,AudioClip audioclip,float volume=1)
+    private void PlaySound(AudioClip audioclip,float volume=1)
     {
-        AudioSource.PlayClipAtPoint(audioclip,position, volume);
+        audioSource.PlayOneShot(audioclip, volume);
+    }
+    public void stopSound()
+    {
+        audioSource.Stop();
     }
 }
